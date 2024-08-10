@@ -54,24 +54,7 @@ const CartItem = ({ item }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    height: hp("100%"),
-    backgroundColor: "white",
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  productsContainer: {
-    padding: wp("4%"),
-  },
-  productCard: {
+  cartItem: {
     flexDirection: "row",
     backgroundColor: "white",
     padding: wp("4%"),
@@ -83,171 +66,44 @@ const styles = StyleSheet.create({
     shadowRadius: wp("2%"),
     elevation: 2,
     borderWidth: wp("0.25%"),
-    flex: 1,
   },
-  cartOptions: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  cartButton: {
-    fontSize: 18,
-    padding: 5,
-    backgroundColor: "#ddd",
-    borderRadius: 5,
-    textAlign: "center",
-    width: 30,
-  },
-  cartItemQuantity: {
-    fontSize: 14,
-    color: "#888",
-  },
-  productImage: {
-    width: wp("30%"),
-    height: hp("12%"),
+  itemImage: {
+    width: wp("20%"),
+    height: hp("10%"),
     resizeMode: "contain",
     marginRight: wp("4%"),
   },
-  productDetails: {
+  itemDetails: {
     flex: 1,
     justifyContent: "center",
-    flexShrink: 1,
   },
-  productTitle: {
+  itemTitle: {
     fontSize: hp("2%"),
     fontWeight: "bold",
     marginBottom: hp("0.5%"),
-    flexShrink: 1,
   },
-  productStars: {
-    fontSize: hp("1.5%"),
-    color: "gray",
-    marginBottom: hp("0.5%"),
-    flexShrink: 1,
-  },
-  productRatingCount: {
-    fontSize: hp("1.5%"),
-    color: "gray",
-    marginBottom: hp("0.5%"),
-    flexShrink: 1,
-  },
-  productPrice: {
+  itemPrice: {
     fontSize: hp("2%"),
     color: "green",
     marginBottom: hp("0.5%"),
-    flexShrink: 1,
   },
-  productCategory: {
-    fontSize: hp("1.5%"),
-    color: "gray",
-    flexShrink: 1,
-  },
-  titleContainer: {
+  quantityContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "black",
-    height: hp("5%"),
-    width: wp("100%"),
+    marginTop: hp("1%"),
   },
-  title: {
-    gap: wp("2%"),
-    marginBottom: hp("1%"),
-    fontSize: hp("3%"),
-    color: "white",
-  },
-  modalContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContent: {
-    width: wp("80%"),
-    padding: wp("4%"),
-    backgroundColor: "white",
-    borderRadius: wp("2%"),
-    alignItems: "center",
-  },
-  modalImage: {
-    width: wp("60%"),
-    height: hp("30%"),
-    resizeMode: "contain",
-    marginBottom: hp("2%"),
-  },
-  modalTitle: {
-    fontSize: hp("2.5%"),
-    fontWeight: "bold",
-    marginBottom: hp("1%"),
-  },
-  modalRatingCount: {
-    fontSize: hp("1.5%"),
-    color: "gray",
-    marginBottom: hp("1%"),
-  },
-  modalPrice: {
-    fontSize: hp("2%"),
-    color: "green",
-    marginBottom: hp("1%"),
-  },
-  modalCategory: {
-    fontSize: hp("1.5%"),
-    color: "gray",
-    marginBottom: hp("1%"),
-  },
-  modalDescription: {
-    fontSize: hp("1.5%"),
-    color: "black",
-    marginBottom: hp("2%"),
-  },
-  addToCartButton: {
-    backgroundColor: "#ff6347",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 5,
-    marginBottom: 10,
-    marginRight: 10,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  closeButton: {
-    backgroundColor: "lightgray",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: "black",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  cartIcon: {
-    marginRight: 10,
-    color: "black",
-  },
-  starContainer: {
-    flexDirection: "row",
-    padding: 0,
-    margin: 0,
-  },
-  cartOptions: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  cartButton: {
-    fontSize: 18,
-    padding: 5,
+  quantityButton: {
     backgroundColor: "#ddd",
-    borderRadius: 5,
-    textAlign: "center",
-    width: 30,
-  },
-  cartItemQuantity: {
-    fontSize: 18,
     padding: 8,
+    borderRadius: 5,
+  },
+  quantityButtonText: {
+    fontSize: 18,
+    textAlign: "center",
+  },
+  itemQuantity: {
+    fontSize: 18,
+    paddingHorizontal: 10,
   },
   deleteButton: {
     backgroundColor: "#ddd",
@@ -258,6 +114,15 @@ const styles = StyleSheet.create({
   deleteIcon: {
     alignSelf: "center",
   },
+  totalContainer: {
+    position: "absolute",
+    right: wp("4%"),
+    bottom: hp("1%"),
+  },
+  totalText: {
+    fontSize: hp("2%"),
+    fontWeight: "bold",
+    color: "black",
+  },
 });
-
 export default CartItem;

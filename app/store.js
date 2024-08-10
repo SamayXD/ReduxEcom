@@ -1,12 +1,9 @@
-// store.js
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-// Initial state for the cart
 const initialState = {
   items: [],
 };
 
-// Create a slice for cart management
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -40,10 +37,8 @@ const cartSlice = createSlice({
   },
 });
 
-// Export actions
 export const { addItem, removeItem, increaseQuantity, decreaseQuantity, clearCart } = cartSlice.actions;
 
-// Configure the store
 const store = configureStore({
   reducer: {
     cart: cartSlice.reducer,

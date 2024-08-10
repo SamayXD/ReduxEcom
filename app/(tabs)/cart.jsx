@@ -2,8 +2,7 @@ import React from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Provider, useSelector } from "react-redux";
-import store, { RootState } from "../store"; // Adjust the import according to your file structure
-import CartItem from "../components/CartItem"; // Adjust the import according to your file structure
+import store from "../store";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -26,7 +25,6 @@ const CartScreen = () => {
     return cartItems.some((item) => item.id === product.id);
   };
 
-  // Calculate the total price of the cart and round it to 2 decimal places
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -39,9 +37,14 @@ const CartScreen = () => {
           <Title />
           <FlatList
             data={items}
-            // renderItem={({ item }) => <CartItem item={item} />}
             renderItem={({ item }) => (
-              <ProductCard product={item} isInCart={isInCart(item)} />
+              <ProductCard
+                product={item}
+                isInCart={isInCart(item)}
+                onPress={() => {
+                  console.log("NOTHING JUST CART CART CLICKED");
+                }}
+              />
             )}
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.cartItemsContainer}
@@ -51,16 +54,21 @@ const CartScreen = () => {
           style={{
             flexDirection: "row",
             justifyContent: "center",
-            backgroundColor: "gray",
+            backgroundColor: "#F9F9F9",
             height: hp("15%"),
             width: wp("100%"),
             position: "absolute",
             borderTopLeftRadius: wp("5%"),
             borderTopRightRadius: wp("5%"),
             bottom: wp("0%"),
+            borderWidth: 1,
+            borderColor: "black",
+            paddingTop: hp("1%"),
           }}
         >
-          <Text style={styles.title}>Total: Rs. {total.toFixed(2)}/-</Text>
+          <Text style={[styles.title, { color: "black" }]}>
+            Total: Rs. {total.toFixed(2)}/-
+          </Text>
         </View>
       </SafeAreaView>
     </View>

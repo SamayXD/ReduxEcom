@@ -1,28 +1,20 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-// import styles from './styles'; // Assuming you have a styles.js file or you can import styles directly
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useDispatch, useSelector } from "react-redux";
-import { removeItem, increaseQuantity, decreaseQuantity } from "../store"; // Adjust the import according to your file structure
+import { removeItem, increaseQuantity, decreaseQuantity } from "../store";
 import Icon from "react-native-vector-icons/FontAwesome";
 const generateStars = (rating) => {
   const totalStars = 5;
   const filledStars = Math.round(rating);
-  const emptyStars = totalStars - filledStars;
 
   return <Text style={styles.productStars}>{"⭐".repeat(filledStars)}</Text>;
 };
 
-const ProductCard = ({
-  product,
-  onPress,
-  isInCart,
-  onIncrease,
-  onDecrease,
-}) => {
+const ProductCard = ({ product, onPress, isInCart }) => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
   const getProductQuantityById = (items, productId) => {
@@ -84,23 +76,6 @@ const ProductCard = ({
 
 export default ProductCard;
 const styles = StyleSheet.create({
-  container: {
-    height: hp("100%"),
-    backgroundColor: "white",
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  productsContainer: {
-    padding: wp("4%"),
-  },
   productCard: {
     flexDirection: "row",
     backgroundColor: "white",
@@ -130,8 +105,8 @@ const styles = StyleSheet.create({
     width: 30,
   },
   cartItemQuantity: {
-    fontSize: 14,
-    color: "#888",
+    fontSize: 18,
+    padding: 8,
   },
   productImage: {
     width: wp("30%"),
@@ -172,112 +147,6 @@ const styles = StyleSheet.create({
     fontSize: hp("1.5%"),
     color: "gray",
     flexShrink: 1,
-  },
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "black",
-    height: hp("5%"),
-    width: wp("100%"),
-  },
-  title: {
-    gap: wp("2%"),
-    marginBottom: hp("1%"),
-    fontSize: hp("3%"),
-    color: "white",
-  },
-  modalContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContent: {
-    width: wp("80%"),
-    padding: wp("4%"),
-    backgroundColor: "white",
-    borderRadius: wp("2%"),
-    alignItems: "center",
-  },
-  modalImage: {
-    width: wp("60%"),
-    height: hp("30%"),
-    resizeMode: "contain",
-    marginBottom: hp("2%"),
-  },
-  modalTitle: {
-    fontSize: hp("2.5%"),
-    fontWeight: "bold",
-    marginBottom: hp("1%"),
-  },
-  modalRatingCount: {
-    fontSize: hp("1.5%"),
-    color: "gray",
-    marginBottom: hp("1%"),
-  },
-  modalPrice: {
-    fontSize: hp("2%"),
-    color: "green",
-    marginBottom: hp("1%"),
-  },
-  modalCategory: {
-    fontSize: hp("1.5%"),
-    color: "gray",
-    marginBottom: hp("1%"),
-  },
-  modalDescription: {
-    fontSize: hp("1.5%"),
-    color: "black",
-    marginBottom: hp("2%"),
-  },
-  addToCartButton: {
-    backgroundColor: "#ff6347",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 5,
-    marginBottom: 10,
-    marginRight: 10,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  closeButton: {
-    backgroundColor: "lightgray",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: "black",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  cartIcon: {
-    marginRight: 10,
-    color: "black",
-  },
-  starContainer: {
-    flexDirection: "row",
-    padding: 0,
-    margin: 0,
-  },
-  cartOptions: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  cartButton: {
-    fontSize: 18,
-    padding: 5,
-    backgroundColor: "#ddd",
-    borderRadius: 5,
-    textAlign: "center",
-    width: 30,
-  },
-  cartItemQuantity: {
-    fontSize: 18,
-    padding: 8,
   },
   deleteButton: {
     backgroundColor: "#ddd",

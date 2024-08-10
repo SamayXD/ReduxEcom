@@ -6,9 +6,7 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
-  Button,
 } from "react-native";
-
 import { SafeAreaView } from "react-native-safe-area-context";
 import Modal from "react-native-modal";
 import {
@@ -17,8 +15,8 @@ import {
 } from "react-native-responsive-screen";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import store, { addItem, removeItem, clearCart } from "../store";
-import ProductCard from "../components/ProductCard"; // Import the ProductCard component
+import store, { addItem, removeItem } from "../store";
+import ProductCard from "../components/ProductCard";
 
 async function fetchProducts() {
   try {
@@ -26,29 +24,22 @@ async function fetchProducts() {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error("Failed to fetch products:", error);
     throw error;
   }
 }
 
-const Title = () => {
-  return (
-    <View style={styles.titleContainer}>
-      <Text style={styles.title}>Shopping</Text>
-    </View>
-  );
-};
+const Title = () => (
+  <View style={styles.titleContainer}>
+    <Text style={styles.title}>Shopping</Text>
+  </View>
+);
 
-const generateStars = (rating) => {
-  const totalStars = 5;
-  const filledStars = Math.round(rating);
-  const emptyStars = totalStars - filledStars;
-
-  return <Text style={styles.productStars}>{"⭐".repeat(filledStars)}</Text>;
-};
+const generateStars = (rating) => (
+  <Text style={styles.productStars}>{"⭐".repeat(Math.round(rating))}</Text>
+);
 
 const ProductModal = ({ visible, product, onClose }) => {
   const dispatch = useDispatch();
@@ -65,8 +56,10 @@ const ProductModal = ({ visible, product, onClose }) => {
       <View style={styles.modalContent}>
         <Image source={{ uri: product.image }} style={styles.modalImage} />
         <Text style={styles.modalTitle}>{product.title}</Text>
-        {generateStars(product.rating.rate)}
-        <Text style={styles.modalRatingCount}>({product.rating.count})</Text>
+        <View style={{ flexDirection: "row" }}>
+          {generateStars(product.rating.rate)}
+          <Text style={styles.modalRatingCount}> ({product.rating.count})</Text>
+        </View>
         <Text style={styles.modalPrice}>Rs. {product.price}</Text>
         <Text style={styles.modalCategory}>{product.category}</Text>
         <Text style={styles.modalDescription}>{product.description}</Text>
@@ -96,61 +89,38 @@ const HomeScreen = () => {
   const [error, setError] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  // const [products, setProducts] = useState([]);
-  useEffect(() => {
-    async function loadProducts() {
-      try {
-        const data = await fetchProducts();
-        setProducts(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
 
-    loadProducts();
+  useEffect(() => {
+    fetchProducts()
+      .then(setProducts)
+      .catch(setError)
+      .finally(() => setLoading(false));
   }, []);
 
-  const handleIncrease = (product) => {
-    dispatch(addItem(product));
-  };
-
-  const handleDecrease = (product) => {
-    dispatch(removeItem(product));
-  };
-
-  const isInCart = (product) => {
-    return cartItems.some((item) => item.id === product.id);
-  };
-
+  const isInCart = (product) =>
+    cartItems.some((item) => item.id === product.id);
   const handleProductPress = (product) => {
     setSelectedProduct(product);
     setModalVisible(true);
   };
-
   const handleCloseModal = () => {
     setModalVisible(false);
     setSelectedProduct(null);
   };
 
-  if (loading) {
+  if (loading)
     return (
       <View style={styles.loadingContainer}>
         <Text>Loading...</Text>
       </View>
     );
-  }
-
-  if (error) {
+  if (error)
     return (
       <View style={styles.errorContainer}>
         <Text>Error: {error.message}</Text>
       </View>
     );
-  }
 
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
@@ -164,8 +134,6 @@ const HomeScreen = () => {
                 product={item}
                 isInCart={isInCart(item)}
                 onPress={handleProductPress}
-                onIncrease={handleIncrease}
-                onDecrease={handleDecrease}
               />
             )}
             keyExtractor={(item) => item.id.toString()}
@@ -182,13 +150,11 @@ const HomeScreen = () => {
   );
 };
 
-const index = () => {
-  return (
-    <Provider store={store}>
-      <HomeScreen />
-    </Provider>
-  );
-};
+const index = () => (
+  <Provider store={store}>
+    <HomeScreen />
+  </Provider>
+);
 
 export default index;
 
@@ -201,6 +167,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   errorContainer: {
     flex: 1,
@@ -210,72 +177,10 @@ const styles = StyleSheet.create({
   productsContainer: {
     padding: wp("4%"),
   },
-  productCard: {
-    flexDirection: "row",
-    backgroundColor: "white",
-    padding: wp("4%"),
-    marginBottom: hp("2%"),
-    borderRadius: wp("2%"),
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: hp("0.25%") },
-    shadowOpacity: 0.1,
-    shadowRadius: wp("2%"),
-    elevation: 2,
-    borderWidth: wp("0.25%"),
-    flex: 1,
-  },
-  cartOptions: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  cartButton: {
-    fontSize: 18,
-    padding: 5,
-    backgroundColor: "#ddd",
-    borderRadius: 5,
-    textAlign: "center",
-    width: 30,
-  },
-  productImage: {
-    width: wp("30%"),
-    height: hp("12%"),
-    resizeMode: "contain",
-    marginRight: wp("4%"),
-  },
-  productDetails: {
-    flex: 1,
-    justifyContent: "center",
-    flexShrink: 1,
-  },
-  productTitle: {
-    fontSize: hp("2%"),
-    fontWeight: "bold",
-    marginBottom: hp("0.5%"),
-    flexShrink: 1,
-  },
   productStars: {
     fontSize: hp("1.5%"),
     color: "gray",
     marginBottom: hp("0.5%"),
-    flexShrink: 1,
-  },
-  productRatingCount: {
-    fontSize: hp("1.5%"),
-    color: "gray",
-    marginBottom: hp("0.5%"),
-    flexShrink: 1,
-  },
-  productPrice: {
-    fontSize: hp("2%"),
-    color: "green",
-    marginBottom: hp("0.5%"),
-    flexShrink: 1,
-  },
-  productCategory: {
-    fontSize: hp("1.5%"),
-    color: "gray",
     flexShrink: 1,
   },
   titleContainer: {
@@ -334,6 +239,9 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: hp("2%"),
   },
+  buttonContainer: {
+    flexDirection: "row",
+  },
   addToCartButton: {
     backgroundColor: "#ff6347",
     paddingVertical: 15,
@@ -360,10 +268,5 @@ const styles = StyleSheet.create({
   cartIcon: {
     marginRight: 10,
     color: "black",
-  },
-  starContainer: {
-    flexDirection: "row",
-    padding: 0,
-    margin: 0,
   },
 });

@@ -12,7 +12,6 @@ export default function TabLayout() {
   return (
     <View style={{ flex: 1, backgroundColor: "gray" }}>
 
-      {/* Tabs component positioned below the tab selection menu */}
       <View style={{ flex: 1 }}>
         <Tabs 
           screenOptions={{
@@ -21,20 +20,20 @@ export default function TabLayout() {
             tabBarActiveBackgroundColor: "#ffffff",
             tabBarInactiveBackgroundColor: "#ffffff",
             tabBarStyle: {
-              marginHorizontal: wp('12.5%'), // 2.5% of the screen width
-              marginBottom: hp('1.25%'), // 1.25% of the screen height
+              marginHorizontal: wp('12.5%'), 
+              marginBottom: hp('1.25%'), 
               backgroundColor: "#ffffff",
               borderWidth: 0,
               borderTopWidth: 0,
-              borderRadius: wp('2.5%'), // 2.5% of the screen width
+              borderRadius: wp('2.5%'), 
               shadowColor: "#000",
-              shadowOffset: { width: 0, height: hp('0.25%') }, // 0.25% of the screen height
+              shadowOffset: { width: 0, height: hp('0.25%') }, 
               shadowOpacity: 0.25,
-              shadowRadius: wp('2.5%'), // 2.5% of the screen width
+              shadowRadius: wp('2.5%'), 
               elevation: 3,
-              paddingHorizontal: wp('3.75%'), // 3.75% of the screen width
-              paddingBottom: hp('0.25%'), // 0.25% of the screen height
-              bottom: hp('1.25%'), // 1.25% of the screen height
+              paddingHorizontal: wp('3.75%'), 
+              paddingBottom: hp('0.25%'), 
+              bottom: hp('1.25%'), 
               position: 'absolute',
             },
             headerShown: false,
