@@ -1,4 +1,18 @@
-# Welcome to your Expo app 👋
+# This repo is used for learning Redux with React native 
+
+## 1. Fetch Product Data:
+### ○ Fetch data from 'https://fakestoreapi.com/products' upon loading the app.
+## 2. Display Using FlatList:
+### ○ Display fetched product data using FlatList, showing at least the product name and price.
+## 3. Modal for Product Details:
+### ○ Implement a modal that shows full details of the product (e.g., description, image, price) when tapped on a product in the list.
+### ○ When the 'Add to Cart' button is tapped in the modal, add the product to the cart in the Redux store.
+### ○ Implement buttons or controls to increment and decrement the quantity of each product in the cart.
+## 4. Redux Integration:
+### ○ Use Redux to manage the state for each product, including the quantity.
+### ○ Implement actions and reducers for incrementing and decrementing the quantity of each product.
+
+# Welcome to ResuxEcom Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -15,34 +29,6 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ```bash
     npx expo start
    ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
 
 Join our community of developers creating universal apps.
 
